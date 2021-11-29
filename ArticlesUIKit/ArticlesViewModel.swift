@@ -39,9 +39,3 @@ class ViewModel{
         return formatter
     }()
 }
-struct ArticleModel {
-    var id = UUID().uuidString
-    var title = ""
-    var creationDate : Date
-    
-}
