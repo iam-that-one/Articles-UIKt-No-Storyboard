@@ -14,9 +14,13 @@ class ViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.addTarget(self, action: #selector(segmentClicked), for: .valueChanged)
         $0.backgroundColor = UIColor.systemIndigo
-
     return $0
     }(UISegmentedControl(items: ["all","sport","comedy","politics"]))
+    
+    lazy var refreshControl : UIRefreshControl = {
+        $0.addTarget(self, action: #selector(reloadTableData), for: .valueChanged)
+      return $0
+    }(UIRefreshControl())
     
     lazy var tableView : UITableView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +31,7 @@ class ViewController: UIViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.layer.cornerRadius = 10
+        $0.refreshControl = refreshControl
         return $0
     }(UITableView())
     
@@ -40,6 +45,10 @@ class ViewController: UIViewController {
         return $0
     }(UIButton(type: .system))
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.fetchData()
+        tableView.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Welcome To Articles App"
@@ -48,10 +57,12 @@ class ViewController: UIViewController {
         uiSettengs()
         
         // I am trying to use NotificationCenter to reload tableView from other view controllers
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData), name: NSNotification.Name(rawValue: "reload"), object: nil)
+      //  NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData), name: NSNotification.Name(rawValue: "reload"), object: nil)
     }
-    @objc func reloadTableData(_ notification: Notification) {
+    @objc func reloadTableData() {
+        viewModel.fetchData()
         tableView.reloadData()
+        self.refreshControl.endRefreshing()
     }
     func uiSettengs(){
         [segment,tableView,addNewArticle].forEach{view.addSubview($0)}

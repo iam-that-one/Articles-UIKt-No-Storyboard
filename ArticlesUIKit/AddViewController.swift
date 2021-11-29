@@ -8,7 +8,7 @@
 import UIKit
 
 class AddViewController: UIViewController {
-    let vc = ViewController()
+    let vc : ViewController! = nil
     var row : String?
     var viewModel = ViewModel()
     let categories = ["all", "sport", "comedy", "politics"]
@@ -19,7 +19,7 @@ class AddViewController: UIViewController {
         $0.backgroundColor = UIColor.lightGray
         return $0
     }(UITextField())
-    
+ 
     lazy var info :  UITextView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.borderWidth = 1.0
@@ -99,19 +99,19 @@ class AddViewController: UIViewController {
         newArticle.articalcate = selectedCaregoery
         newArticle.creationDate = Date()
         newArticle.id = UUID()
-        
         do{
             try viewModel.getContext().save()
-            viewModel.fetchData()
+        
         }catch let error{
             print(error)
         }
-        viewModel.fetchData()
+       
         self.dismiss(animated: true, completion:  {
-            self.vc.tableView.reloadData()
-
+           
         })
-
+        self.viewModel.fetchData()
+        self.vc?.tableView.reloadData()
+        self.vc?.reloadTableData()
     }
 
 }
