@@ -30,7 +30,7 @@ class AddViewController: UIViewController {
     
     lazy var saveBtn : UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .systemPink
+        $0.backgroundColor = UIColor.systemIndigo
         $0.tintColor = .white
         $0.layer.cornerRadius = 5
         $0.setTitle("Save", for: .normal)

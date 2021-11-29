@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     lazy var segment : UISegmentedControl = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.addTarget(self, action: #selector(segmentClicked), for: .valueChanged)
+        $0.backgroundColor = UIColor.systemIndigo
 
     return $0
     }(UISegmentedControl(items: ["all","sport","comedy","politics"]))
@@ -31,7 +32,7 @@ class ViewController: UIViewController {
     lazy var addNewArticle : UIButton = {
         $0.setTitle("Add an article", for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor.systemPink
+        $0.backgroundColor = UIColor.systemIndigo
         $0.tintColor = .white
         $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(addNewArticleBtnClick), for: .touchDown)
@@ -44,6 +45,8 @@ class ViewController: UIViewController {
         segment.selectedSegmentIndex = 0
         self.viewModel.fetchData()
         uiSettengs()
+        
+        // I am trying to use Notifications to reload tableView
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData), name: NSNotification.Name(rawValue: "reload"), object: nil)
     }
     @objc func reloadTableData(_ notification: Notification) {
