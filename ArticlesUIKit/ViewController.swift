@@ -51,9 +51,6 @@ class ViewController: UIViewController {
         segment.selectedSegmentIndex = 0
         self.viewModel.fetchData()
         uiSettengs()
-        
-        // I am trying to use NotificationCenter to reload tableView from other view controllers
-      //  NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData), name: NSNotification.Name(rawValue: "reload"), object: nil)
     }
     @objc func reloadTableData() {
         viewModel.fetchData()
