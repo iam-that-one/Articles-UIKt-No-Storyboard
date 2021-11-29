@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     var viewModel = ViewModel()
     lazy var segment : UISegmentedControl = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     
     lazy var refreshControl : UIRefreshControl = {
         $0.addTarget(self, action: #selector(reloadTableData), for: .valueChanged)
-      return $0
+        return $0
     }(UIRefreshControl())
     
     lazy var tableView : UITableView = {
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         $0.addTarget(self, action: #selector(addNewArticleBtnClick), for: .touchDown)
         return $0
     }(UIButton(type: .system))
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Welcome To Articles App"
@@ -113,7 +113,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.articles.count
     }
-
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         let toBeDelete = viewModel.articles[indexPath.row]

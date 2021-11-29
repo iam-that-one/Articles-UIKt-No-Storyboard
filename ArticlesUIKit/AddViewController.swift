@@ -19,7 +19,7 @@ class AddViewController: UIViewController {
         $0.backgroundColor = UIColor.lightGray
         return $0
     }(UITextField())
- 
+    
     lazy var info :  UITextView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.borderWidth = 1.0
@@ -35,7 +35,6 @@ class AddViewController: UIViewController {
         $0.layer.cornerRadius = 5
         $0.setTitle("Save", for: .normal)
         $0.addTarget(self, action: #selector(saveBtnClick), for: .touchDown)
-
         return $0
     }(UIButton(type: .system))
     
@@ -43,8 +42,6 @@ class AddViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.delegate = self
         $0.dataSource = self
-
-        
         return $0
     }(UIPickerView())
     override func viewDidLoad() {
@@ -71,16 +68,13 @@ class AddViewController: UIViewController {
             saveBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -20),
             saveBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 50),
             saveBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -50),
-            
-
         ])
-        // Do any additional setup after loading the view.
     }
     @objc func saveBtnClick(){
         var selectedCaregoery = ""
         print(picker.selectedRow(inComponent: 0))
         if picker.selectedRow(inComponent: 0) == 0{
-           selectedCaregoery = "all"
+            selectedCaregoery = "all"
         }else if picker.selectedRow(inComponent: 0) == 1{
             selectedCaregoery = "sport"
         }else if picker.selectedRow(inComponent: 0) == 2{
@@ -101,19 +95,19 @@ class AddViewController: UIViewController {
         newArticle.id = UUID()
         do{
             try viewModel.getContext().save()
-        
+            
         }catch let error{
             print(error)
         }
-       
+        
         self.dismiss(animated: true, completion:  {
-           
+            
         })
         self.viewModel.fetchData()
         self.vc?.tableView.reloadData()
         self.vc?.reloadTableData()
     }
-
+    
 }
 
 extension AddViewController : UIPickerViewDelegate, UIPickerViewDataSource{
@@ -122,7 +116,7 @@ extension AddViewController : UIPickerViewDelegate, UIPickerViewDataSource{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-         return categories.count
+        return categories.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         self.row = categories[row]

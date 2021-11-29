@@ -31,7 +31,7 @@ class ViewModel{
             print("something went wrong while fetching data \(error.userInfo)")
         }
     }
-     var dateFormatter: DateFormatter = {
+    var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
         formatter.dateStyle = .long
