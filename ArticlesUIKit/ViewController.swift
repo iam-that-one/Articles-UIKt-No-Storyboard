@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.addTarget(self, action: #selector(segmentClicked), for: .valueChanged)
         $0.backgroundColor = UIColor.systemIndigo
-    return $0
+        return $0
     }(UISegmentedControl(items: ["all","sport","comedy","politics"]))
     
     lazy var refreshControl : UIRefreshControl = {
@@ -44,11 +44,7 @@ class ViewController: UIViewController {
         $0.addTarget(self, action: #selector(addNewArticleBtnClick), for: .touchDown)
         return $0
     }(UIButton(type: .system))
-    
-    override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchData()
-        tableView.reloadData()
-    }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Welcome To Articles App"
@@ -62,7 +58,7 @@ class ViewController: UIViewController {
     @objc func reloadTableData() {
         viewModel.fetchData()
         tableView.reloadData()
-        self.refreshControl.endRefreshing()
+        refreshControl.endRefreshing()
     }
     func uiSettengs(){
         [segment,tableView,addNewArticle].forEach{view.addSubview($0)}
