@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.delegate = self
         $0.dataSource = self
+        $0.layer.cornerRadius = 10
         return $0
     }(UITableView())
     
