@@ -40,9 +40,10 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Update area"
         addTitleTextField.text = article?.title
         info.text = article?.info
-        view.backgroundColor = .systemGray4
+        view.backgroundColor = .white
         [addTitleTextField,info,updateBtn].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
@@ -61,6 +62,8 @@ class DetailsViewController: UIViewController {
         ])
     }
     @objc func updateBtnClick(){
+        guard addTitleTextField.text != "" else{return}
+        guard info.text != "" else{return}
         article?.title = addTitleTextField.text
         article?.info = info.text
         
