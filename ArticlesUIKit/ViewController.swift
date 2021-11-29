@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         self.viewModel.fetchData()
         uiSettengs()
         
-        // I am trying to use NotificationCenter to reload tableView
+        // I am trying to use NotificationCenter to reload tableView from other view controllers
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableData), name: NSNotification.Name(rawValue: "reload"), object: nil)
     }
     @objc func reloadTableData(_ notification: Notification) {
