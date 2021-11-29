@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
+class UpdateViewController: UIViewController {
     var viewModel = ViewModel()
     var article : Article? = nil
     lazy var addTitleTextField : UITextField = {

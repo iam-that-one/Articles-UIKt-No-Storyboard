@@ -138,9 +138,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(viewModel.articles[indexPath.row].articalcate ?? "")
-        let detailsViewController = DetailsViewController()
-        self.present(UINavigationController(rootViewController: detailsViewController), animated: true, completion: nil)
-        detailsViewController.article = viewModel.articles[indexPath.row]
+        let updateViewController = UpdateViewController()
+        self.present(UINavigationController(rootViewController: updateViewController), animated: true, completion: nil)
+        updateViewController.article = viewModel.articles[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
