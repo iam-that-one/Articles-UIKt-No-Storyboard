@@ -48,7 +48,6 @@ class MyCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         cellSettings()
-        
     }
     func cellSettings(){
         [articleTitle,articleInfo,articleDate,clockImageView,category].forEach{contentView.addSubview($0)}
@@ -65,7 +64,7 @@ class MyCell: UITableViewCell {
             clockImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             clockImageView.heightAnchor.constraint(equalToConstant: 20),
             clockImageView.widthAnchor.constraint(equalToConstant: 20),
-            
+
             articleDate.leadingAnchor.constraint(equalTo: clockImageView.trailingAnchor,constant: 10),
             articleDate.centerYAnchor.constraint(equalTo: clockImageView.centerYAnchor),
             

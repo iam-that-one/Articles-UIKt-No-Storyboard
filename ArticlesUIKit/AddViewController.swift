@@ -84,17 +84,22 @@ class AddViewController: UIViewController {
         }
         
         // create an article
-        
+        if addTitleTextField.text == "" && info.text == ""{
+                        let alert = UIAlertController(title: "Warning", message: "Make sure you filled out all fields", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler:nil))
+                        self.present(alert, animated: true, completion: nil)
+            return
+        }
         let newArticle = Article(context: viewModel.getContext())
-        guard addTitleTextField.text != "" else{return}
-        guard info.text != "" else{return}
         newArticle.title = addTitleTextField.text
         newArticle.info = info.text
         newArticle.articalcate = selectedCaregoery
         newArticle.creationDate = Date()
         newArticle.id = UUID()
+        
         do{
             try viewModel.getContext().save()
+            
             
         }catch let error{
             print(error)
@@ -103,9 +108,7 @@ class AddViewController: UIViewController {
         self.dismiss(animated: true, completion:  {
             
         })
-        self.viewModel.fetchData()
-        self.vc?.tableView.reloadData()
-        self.vc?.reloadTableData()
+     
     }
     
 }

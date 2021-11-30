@@ -53,8 +53,7 @@ class ViewController: UIViewController {
         uiSettengs()
     }
     @objc func reloadTableData() {
-        viewModel.fetchData()
-        tableView.reloadData()
+        segmentClicked()
         refreshControl.endRefreshing()
     }
     func uiSettengs(){
@@ -107,7 +106,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource{
         cell.articleInfo.text = viewModel.articles[indexPath.row].info
         let stringDate = viewModel.dateFormatter.string(from: viewModel.articles[indexPath.row].creationDate ?? Date())
         cell.articleDate.text = stringDate
-        cell.category.text = "#" + viewModel.articles[indexPath.row].articalcate!
+        cell.category.text = viewModel.articles[indexPath.row].articalcate ?? ""
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,7 +118,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource{
         let toBeDelete = viewModel.articles[indexPath.row]
         if editingStyle == .delete {
             let alert = UIAlertController(title: "Warning", message: "Are you sure you want to delete the article with name \(toBeDelete.title ?? "")", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { [weak alert] (_) in
+            alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {(_) in
                 
                 self.viewModel.getContext().delete(toBeDelete)
                 do {
@@ -130,7 +129,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource{
                     print("Error While Deleting Article: \(error.userInfo)")
                 }
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
                 
             }))
             self.present(alert, animated: true, completion: nil)
@@ -138,9 +137,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(viewModel.articles[indexPath.row].articalcate ?? "")
-        let updateViewController = UpdateViewController()
-        self.present(UINavigationController(rootViewController: updateViewController), animated: true, completion: nil)
-        updateViewController.article = viewModel.articles[indexPath.row]
+        let detailsViewController = UpdateViewController()
+        self.present(UINavigationController(rootViewController: detailsViewController), animated: true, completion: nil)
+        detailsViewController.article = viewModel.articles[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
