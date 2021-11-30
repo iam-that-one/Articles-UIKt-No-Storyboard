@@ -84,7 +84,7 @@ class AddViewController: UIViewController {
         }
         
         // create an article
-        if addTitleTextField.text == "" && info.text == ""{
+        if addTitleTextField.text == "" || info.text == ""{
                         let alert = UIAlertController(title: "Warning", message: "Make sure you filled out all fields", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler:nil))
                         self.present(alert, animated: true, completion: nil)
@@ -99,18 +99,13 @@ class AddViewController: UIViewController {
         
         do{
             try viewModel.getContext().save()
-            
-            
         }catch let error{
             print(error)
         }
-        
         self.dismiss(animated: true, completion:  {
             
         })
-     
     }
-    
 }
 
 extension AddViewController : UIPickerViewDelegate, UIPickerViewDataSource{
