@@ -58,6 +58,7 @@ class MyCell: UITableViewCell {
             
             articleInfo.topAnchor.constraint(equalTo: articleTitle.bottomAnchor,constant: 20),
             articleInfo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 20),
+            articleInfo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20),
             
             clockImageView.topAnchor.constraint(equalTo: articleInfo.bottomAnchor,constant: 20),
             clockImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 20),
